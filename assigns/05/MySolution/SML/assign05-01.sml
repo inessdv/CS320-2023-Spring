@@ -27,23 +27,53 @@ library for this class.
 
 (* ****** ****** *)
 
-(*
+
 fun
 ref_get_at
-(ref: 'a ref, i: int): 'a
+(ref: 'a ref, i: int): 'a =
+
+fn(ref,i0) =>
+let
+exception Found of (i)
+val foreach = ref_foreach(r0)
+
+
 fun
 ref_forall
-(ref: 'a ref, test: 'a -> bool): bool
+(r0: 'a ref, test: 'a -> bool): bool =
+
+let
+  fun loop(arr: 'a list, test: 'a -> bool): bool =
+    (
+    case arr of
+      nil => true
+    | x1 :: xs =>
+      test(x1) andalso loop(xs, test)
+    )
+in
+loop([!r0], test)
+end
+
+
+(**
+
+
+
 fun
 ref_map_list
-(ref: 'a ref, fopr: ('a) -> 'b): 'b list
+(ref: 'a ref, fopr: ('a) -> 'b): 'b list =
+
+
 fun
 ref_foldleft
-(ref: 'a ref, res: 'r, fopr: ('r * 'a) -> 'r): 'r
+(ref: 'a ref, res: 'r, fopr: ('r * 'a) -> 'r): 'r =
+
+
 fun
 ref_ifoldleft
-(ref: 'a ref, res: 'r, fopr: ('r * int * 'a) -> 'r): 'r
-*)
+(ref: 'a ref, res: 'r, fopr: ('r * int * 'a) -> 'r): 'r =
+
+**)
 
 (* ****** ****** *)
 
