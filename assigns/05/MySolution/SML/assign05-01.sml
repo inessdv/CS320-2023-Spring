@@ -27,26 +27,23 @@ library for this class.
 
 (* ****** ****** *)
 
-(**
+val xref1 = ref(1)
+
 fun
 ref_get_at
 (r0: 'a ref, i: int): 'a =
 
-let
-
-in
-loop
-end
-
-
-
-
-val
-list_get_at =
-fn(xs, i0) =>
-foreach_to_get_at(list_foreach)(xs, i0)
-
-**)
+  let
+    val xs = [!r0]
+  in
+    (
+    case xs of
+    nil => raise Subscript
+    | x1 :: xs =>
+    if i <> 0 then raise Subscript
+    else !r0
+    ) 
+  end
 
 (** ref_forall working ***)
 fun
@@ -121,6 +118,7 @@ let
 in
   loop([!r0],res, fopr)
 end
+
 
 
 (* ****** ****** *)
