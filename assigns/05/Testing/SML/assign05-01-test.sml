@@ -12,7 +12,7 @@ val xref1 = ref(1)
 val xref2 = ref(2)
 (* ****** ****** *)
 
-(**
+
 val () =
 assert320
 (
@@ -25,7 +25,7 @@ assert320
  handle Subscript => 1) =
  foreach_to_get_at(ref_foreach)(xref1, 0))
 (* ****** ****** *)
-**)
+
 
 val () =
 assert320(ref_forall(xref0, fn x => x = 0))
