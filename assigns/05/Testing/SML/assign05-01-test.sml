@@ -33,18 +33,21 @@ val () =
 assert320(ref_forall(xref1, fn x => x > 1) = false)
 (* ****** ****** *)
 
-(**
 
 val () =
 assert320(hd(ref_map_list(xref2, fn x => x * x)) = 4)
 (* ****** ****** *)
+
+
 val () =
 assert320(ref_foldleft(xref2, 10, fn (r0, x) => r0 + x * x) = 14)
+
 (* ****** ****** *)
+
 val () =
 assert320(ref_ifoldleft(xref2, 10, fn (r0, i, x) => r0 + 2*(i+1) * x * x) = 18) 
 
-**)
+
 (* ****** ****** *)
 val () = print("Assign05-01-test passed!\n")
 (* ****** ****** *)
