@@ -27,17 +27,28 @@ library for this class.
 
 (* ****** ****** *)
 
-
+(**
 fun
 ref_get_at
-(ref: 'a ref, i: int): 'a =
+(r0: 'a ref, i: int): 'a =
 
-fn(ref,i0) =>
 let
-exception Found of (i)
-val foreach = ref_foreach(r0)
+
+in
+loop
+end
 
 
+
+
+val
+list_get_at =
+fn(xs, i0) =>
+foreach_to_get_at(list_foreach)(xs, i0)
+
+**)
+
+(** ref_forall working ***)
 fun
 ref_forall
 (r0: 'a ref, test: 'a -> bool): bool =
@@ -55,25 +66,62 @@ loop([!r0], test)
 end
 
 
-(**
 
-
+(** ref_map_list working ***)
 
 fun
 ref_map_list
-(ref: 'a ref, fopr: ('a) -> 'b): 'b list =
+(r0: 'a ref, fopr: ('a) -> 'b): 'b list =
 
+let
+  fun loop(arr: 'a list, fopr: ('a) -> 'b): 'b list =
+    (
+    case arr of
+      nil => nil
+    | x1 :: xs =>
+      fopr(x1) :: loop(xs, fopr)
+    )
+in
+loop([!r0], fopr)
+end
 
+(** ref_foldleft working ***)
 fun
 ref_foldleft
-(ref: 'a ref, res: 'r, fopr: ('r * 'a) -> 'r): 'r =
+(r0: 'a ref, res: 'r, fopr: ('r * 'a) -> 'r): 'r =
+
+let
+  fun loop( xs: 'a list
+  , r0: 'r, fopr: 'r * 'a -> 'r): 'r =
+  (
+  case xs of
+    nil => r0
+  | x1 :: xs =>
+    loop(xs, fopr(r0, x1), fopr)
+  )
+in
+  loop([!r0],res, fopr)
+end
+
 
 
 fun
 ref_ifoldleft
-(ref: 'a ref, res: 'r, fopr: ('r * int * 'a) -> 'r): 'r =
+(r0: 'a ref, res: 'r, fopr: ('r * int * 'a) -> 'r): 'r =
 
-**)
+let
+  fun loop( xs: 'a list
+  , r0: 'r, fopr: ('r * int * 'a) -> 'r): 'r =
+  (
+  case xs of
+    nil => r0
+  | x1 :: xs =>
+    loop(xs, fopr(r0, 0, x1), fopr)
+  )
+in
+  loop([!r0],res, fopr)
+end
+
 
 (* ****** ****** *)
 
